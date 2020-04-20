@@ -2,3 +2,57 @@
   margin: 0;
   padding: 0;
 }
+
+main {
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffeaa7;
+}
+
+section {
+  background-color: #e7e7e7;
+  border: 3px solid black;
+  border-radius: 10px;
+  margin-top: 10px;
+  justify-content: space-around;
+  min-width: 225px;
+  min-height: 100px;
+  width: 31vw;
+  height: fit-content;
+}
+
+h2 {
+  margin: 10px 15px;
+  font-size: 30px;
+}
+
+.addBtn {
+  /* need block status for "margin: 0 auto;" */
+  display: block;
+  margin: 0 auto;
+  width: 90%;
+  min-height: 5vh;
+  background-color: #e7e7e7;
+  color: #555555;
+  border: 0;
+  font-size: 20px;
+}
+.addBtn span::before {
+  content: "+ ";
+  font-size: 25px;
+}
+.addBtn:hover {
+  background-color: #d6d6d6;
+  color: #333333;
+}
+
+#todo {
+}
+
+#doing {
+}
+
+#done {
+}
