@@ -26,5 +26,6 @@ function showAddForm(e) {
   form.appendChild(saveBtn);
   form.appendChild(cancelBtn);
   document.querySelector(`section#${position}`).appendChild(form);
-  e.target.style.display = "none";
+  document.querySelector(`.addBtn[data-position="${position}"]`).style.display =
+    "none";
 }
