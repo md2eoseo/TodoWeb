@@ -13,12 +13,18 @@ function showAddForm(e) {
   const textarea = document.createElement("textarea");
   const saveBtn = document.createElement("button");
   const cancelBtn = document.createElement("button");
+  const position = e.target.dataset.position;
   textarea.placeholder = "Write contents for this card...";
+  saveBtn.dataset.action = "inputTextarea";
   saveBtn.type = "submit";
-  saveBtn.value = "Save";
-  cancelBtn.value = "X";
+  saveBtn.textContent = "Save";
+  saveBtn.dataset.position = position;
+  saveBtn.dataset.action = "save";
+  cancelBtn.textContent = "X";
+  cancelBtn.dataset.action = "cancel";
   form.appendChild(textarea);
   form.appendChild(saveBtn);
   form.appendChild(cancelBtn);
-  console.log(e.target.dataset.position);
+  document.querySelector(`section#${position}`).appendChild(form);
+  e.target.style.display = "none";
 }
