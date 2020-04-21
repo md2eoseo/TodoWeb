@@ -125,6 +125,7 @@ function post(data) {
   })
     .then((res) => res.json())
     .then((data) => {
+      showCard(data);
       console.log(`inserted ${data} in database`);
     });
 }
