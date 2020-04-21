@@ -98,6 +98,20 @@ function checkValidation(form, position) {
   }
 }
 
+function deleteIt(id) {
+  fetch(DB_URL + "/" + id, {
+    method: "delete",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "x-apikey": API_KEY,
+      "cache-control": "no-cache",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(`deleted ${data}`));
+  document.querySelector(`div[data-id="${id}"]`).remove();
+}
+
 function post(data) {
   const postData = JSON.stringify(data);
   fetch(DB_URL, {
@@ -138,10 +152,12 @@ function showCard(card) {
   const copy = template.cloneNode(true);
   const parent = document.querySelector(`#${card.position} div`);
 
-  copy.querySelector("span").dataset.id = card._id;
+  copy.querySelector("div").dataset.id = card._id;
   copy.querySelector("span").textContent = card.desc;
 
-  copy.querySelector(".deleteBtn").addEventListener("click", () => {});
+  copy.querySelector(".deleteBtn").addEventListener("click", () => {
+    deleteIt(card._id);
+  });
 
   parent.appendChild(copy);
 }
