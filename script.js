@@ -209,11 +209,9 @@ function showCard(card) {
         .forEach((ele) => ele.classList.add("hidden"))
     );
   // Error: something weird happen when clicks deleteBtn
-  // Uncaught TypeError: Cannot read property 'textContent' of null at HTMLDivElement.<anonymous>
+  // Uncaught TypeError: Cannot set property 'value' of null at HTMLDivElement.<anonymous>
   copy.querySelector(".card").addEventListener("click", (e) => {
-    e.target.parentNode.querySelector("input").value = e.target.querySelector(
-      ".desc"
-    ).textContent;
+    e.target.parentNode.querySelector(".editText").value = card.desc;
     e.target.classList.add("hidden");
     e.target.parentNode.querySelector(".editForm").classList.remove("hidden");
   });
