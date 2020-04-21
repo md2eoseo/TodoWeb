@@ -6,6 +6,7 @@ window.addEventListener("load", () => {
   document.querySelectorAll(".addBtn").forEach((ele) => {
     ele.addEventListener("click", showAddForm);
   });
+  get();
 });
 
 function showAddForm(e) {
@@ -70,6 +71,17 @@ function checkValidation(form, position) {
         .querySelector(`.addBtn[data-position="${position}"]`)
         .classList.remove("hidden");
     } else {
+      // put(
+      //   {
+      //     num: elements.num.value,
+      //     confirmed_date: elements.confirmed_date.value,
+      //     status: elements.status.value,
+      //     route: checked.map((ele) => ele.value),
+      //   },
+      //   form.parentNode.dataset.id
+      // );
+      // console.log("edited " + elements.num.value);
+      // form.parentNode.remove();
     }
     return true;
   } else {
@@ -95,4 +107,35 @@ function post(data) {
     .then((data) => {
       console.log(`inserted ${data} in database`);
     });
+}
+
+function get() {
+  document.querySelectorAll(".cards").forEach((ele) => (ele.innerHTML = ""));
+  fetch(DB_URL, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "x-apikey": API_KEY,
+      "cache-control": "no-cache",
+    },
+  })
+    .then((res) => res.json())
+    .then(showCards);
+}
+
+function showCards(cards) {
+  cards.forEach(showCard);
+}
+
+function showCard(card) {
+  const template = document.querySelector("template").content;
+  const copy = template.cloneNode(true);
+  const parent = document.querySelector(`#${card.position} div`);
+
+  copy.querySelector("span").dataset.id = card._id;
+  copy.querySelector("span").textContent = card.desc;
+
+  copy.querySelector(".deleteBtn").addEventListener("click", () => {});
+
+  parent.appendChild(copy);
 }

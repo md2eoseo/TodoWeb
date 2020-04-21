@@ -10,24 +10,30 @@
     <main>
       <section id="todo">
         <h2>Things To Do</h2>
+        <div class="cards"></div>
         <button class="addBtn" data-position="todo">
           <span data-position="todo">Add card</span>
         </button>
       </section>
       <section id="doing">
         <h2>Doing</h2>
+        <div class="cards"></div>
         <button class="addBtn" data-position="doing">
           <span data-position="doing">Add card</span>
         </button>
       </section>
       <section id="done">
         <h2>Done</h2>
+        <div class="cards"></div>
         <button class="addBtn" data-position="done">
           <span data-position="done">Add card</span>
         </button>
       </section>
     </main>
-    <template></template>
+    <template>
+      <span class="card" data-id></span>
+      <button class="deleteBtn">X</button>
+    </template>
     <script src="script.js"></script>
   </body>
 </html>
