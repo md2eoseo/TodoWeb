@@ -31,7 +31,7 @@ h2 {
 .addBtn {
   /* need block status for "margin: 0 auto;" */
   display: block;
-  margin: 0 auto;
+  margin: 5px auto;
   width: 95%;
   min-height: 5vh;
   background-color: #e7e7e7;
@@ -57,6 +57,19 @@ h2 {
 }
 
 #done {
+}
+
+.card-box {
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+  margin: 5px 0 5px 15px;
+  padding: 3px 10px;
+  border: 2px outset #efefef;
+  border-radius: 5px;
+  border-top: 0;
+  border-left: 0;
+  background-color: #fff;
 }
 
 .invalid {
