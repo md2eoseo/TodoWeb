@@ -193,17 +193,22 @@ function showCard(card) {
       card._id
     );
   });
-
   copy
     .querySelector(".card")
     .addEventListener("mouseenter", (e) =>
-      e.target.querySelector(".deleteBtn").classList.remove("hidden")
+      e.target
+        .querySelectorAll("button")
+        .forEach((ele) => ele.classList.remove("hidden"))
     );
   copy
     .querySelector(".card")
     .addEventListener("mouseleave", (e) =>
-      e.target.querySelector(".deleteBtn").classList.add("hidden")
+      e.target
+        .querySelectorAll("button")
+        .forEach((ele) => ele.classList.add("hidden"))
     );
+  // Error: something weird happen when clicks deleteBtn
+  // Uncaught TypeError: Cannot read property 'textContent' of null at HTMLDivElement.<anonymous>
   copy.querySelector(".card").addEventListener("click", (e) => {
     e.target.parentNode.querySelector("input").value = e.target.querySelector(
       ".desc"
