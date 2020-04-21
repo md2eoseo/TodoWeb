@@ -32,6 +32,12 @@ function showAddForm(e) {
   });
   cancelBtn.textContent = "X";
   cancelBtn.dataset.action = "cancel";
+  cancelBtn.addEventListener("click", (e) => {
+    e.target.parentNode.remove();
+    document
+      .querySelector(`.addBtn[data-position="${position}"]`)
+      .classList.remove("hidden");
+  });
   form.appendChild(textarea);
   form.appendChild(textarea_p);
   form.appendChild(saveBtn);
