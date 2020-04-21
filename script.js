@@ -141,7 +141,19 @@ function get() {
     },
   })
     .then((res) => res.json())
-    .then(showCards);
+    .then(showCards)
+    .then(() => {
+      // TODO: add event listener for new card. maybe in showCard()?
+      document.querySelectorAll(".card-box").forEach((ele) => {
+        ele.addEventListener("mouseenter", (e) =>
+          e.target.querySelector(".deleteBtn").classList.remove("hidden")
+        );
+        ele.addEventListener("mouseleave", (e) =>
+          e.target.querySelector(".deleteBtn").classList.add("hidden")
+        );
+        ele.addEventListener("click", (e) => console.log(e.target));
+      });
+    });
 }
 
 function showCards(cards) {

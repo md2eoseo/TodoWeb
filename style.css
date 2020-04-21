@@ -60,8 +60,13 @@ h2 {
   border: 2px outset #efefef;
   border-radius: 5px;
   border-top: 0;
+  border-right: 0;
   border-left: 0;
   background-color: #fff;
+}
+
+.card-box:hover {
+  background-color: #f8f8f8;
 }
 
 #addForm textarea {
