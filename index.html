@@ -30,13 +30,17 @@
         </button>
       </section>
     </main>
+
     <template>
       <div class="card-box" data-id>
-        <span class="card"></span>
-        <button class="deleteBtn hidden">X</button>
-      </div>
-      <div class="editForm hidden">
-        <input type="text" /><button type="submit">Edit</button>
+        <div class="card">
+          <span class="desc"></span>
+          <button class="deleteBtn hidden">X</button>
+        </div>
+        <div class="editForm hidden">
+          <input type="text" class="editText" />
+          <button type="submit">Edit</button>
+        </div>
       </div>
     </template>
     <script src="script.js"></script>

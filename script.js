@@ -144,14 +144,22 @@ function get() {
     .then(showCards)
     .then(() => {
       // TODO: add event listener for new card. maybe in showCard()?
-      document.querySelectorAll(".card-box").forEach((ele) => {
+      document.querySelectorAll(".card").forEach((ele) => {
         ele.addEventListener("mouseenter", (e) =>
           e.target.querySelector(".deleteBtn").classList.remove("hidden")
         );
         ele.addEventListener("mouseleave", (e) =>
           e.target.querySelector(".deleteBtn").classList.add("hidden")
         );
-        ele.addEventListener("click", (e) => console.log(e.target));
+        ele.addEventListener("click", (e) => {
+          e.target.parentNode.querySelector(
+            "input"
+          ).value = e.target.querySelector(".desc").textContent;
+          e.target.classList.add("hidden");
+          e.target.parentNode
+            .querySelector(".editForm")
+            .classList.remove("hidden");
+        });
       });
     });
 }

@@ -51,7 +51,7 @@ h2 {
   color: #333333;
 }
 
-.card-box {
+.card {
   display: flex;
   justify-content: space-between;
   width: 85%;
@@ -65,8 +65,25 @@ h2 {
   background-color: #fff;
 }
 
-.card-box:hover {
+.card:hover {
   background-color: #f8f8f8;
+}
+
+.editForm {
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+  margin: 5px 0 5px 15px;
+  padding: 3px 10px;
+  border: 1px inset #efefef;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.editText {
+  width: 85%;
+  border: 0;
+  outline: none;
 }
 
 #addForm textarea {
