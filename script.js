@@ -77,14 +77,15 @@ function checkValidation(form, position) {
       document
         .querySelector(`.addBtn[data-position="${position}"]`)
         .classList.remove("hidden");
-    } else {
-      put(
-        { position: position, desc: textarea.value },
-        form.parentNode.dataset.id
-      );
-      console.log("edited " + elements.num.value);
-      form.parentNode.remove();
     }
+    // else {
+    //   put(
+    //     { position: position, desc: textarea.value },
+    //     form.parentNode.dataset.id
+    //   );
+    //   console.log("edited " + elements.num.value);
+    //   form.parentNode.remove();
+    // }
     return true;
   } else {
     if (!textarea.checkValidity()) {
@@ -217,5 +218,45 @@ function showCard(card) {
     e.target.parentNode.querySelector(".editForm").classList.remove("hidden");
   });
 
+  copy.querySelector(".moveLeftBtn").addEventListener("click", () => {
+    moveLeftPut(card);
+  });
+  copy.querySelector(".moveRightBtn").addEventListener("click", () => {
+    moveRightPut(card);
+  });
+
   parent.appendChild(copy);
+}
+
+function moveLeftPut(card) {
+  const from = card.position;
+  let to = "";
+  if (from == "done") to = "doing";
+  else if (from == "doing") to = "todo";
+  put(
+    {
+      position: to,
+      desc: card.desc,
+    },
+    card._id
+  );
+  card.position = to;
+  document.querySelector(`.card-box[data-id="${card._id}"]`).remove();
+  showCard(card);
+}
+function moveRightPut(card) {
+  const from = card.position;
+  let to = "";
+  if (from == "todo") to = "doing";
+  else if (from == "doing") to = "done";
+  put(
+    {
+      position: to,
+      desc: card.desc,
+    },
+    card._id
+  );
+  card.position = to;
+  document.querySelector(`.card-box[data-id="${card._id}"]`).remove();
+  showCard(card);
 }
