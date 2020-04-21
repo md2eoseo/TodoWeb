@@ -51,11 +51,10 @@ function showAddForm(e) {
 
 function checkValidation(form, position) {
   let validForm = false;
-  const elements = form.elements;
-  console.log(elements);
 
   const textarea = form.querySelector("textarea");
   const textarea_p = form.querySelector("p");
+  textarea.value = textarea.value.trim();
   textarea.classList.remove("invalid");
   if (!textarea.checkValidity()) {
     textarea.classList.add("invalid");
@@ -96,7 +95,7 @@ function checkValidation(form, position) {
 }
 
 function put(data, id) {
-  if (data.desc == "") {
+  if (data.desc.trim() == "") {
     deleteIt(id);
   } else {
     const postData = JSON.stringify(data);
