@@ -51,6 +51,8 @@ function showAddForm(e) {
 
 function checkValidation(form, position) {
   let validForm = false;
+  const elements = form.elements;
+  console.log(elements);
 
   const textarea = form.querySelector("textarea");
   const textarea_p = form.querySelector("p");
@@ -77,17 +79,12 @@ function checkValidation(form, position) {
         .querySelector(`.addBtn[data-position="${position}"]`)
         .classList.remove("hidden");
     } else {
-      // put(
-      //   {
-      //     num: elements.num.value,
-      //     confirmed_date: elements.confirmed_date.value,
-      //     status: elements.status.value,
-      //     route: checked.map((ele) => ele.value),
-      //   },
-      //   form.parentNode.dataset.id
-      // );
-      // console.log("edited " + elements.num.value);
-      // form.parentNode.remove();
+      put(
+        { position: position, desc: textarea.value },
+        form.parentNode.dataset.id
+      );
+      console.log("edited " + elements.num.value);
+      form.parentNode.remove();
     }
     return true;
   } else {
@@ -96,6 +93,29 @@ function checkValidation(form, position) {
     }
     console.log("validation error!!");
   }
+}
+
+function put(data, id) {
+  const postData = JSON.stringify(data);
+  fetch(DB_URL + "/" + id, {
+    method: "put",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "x-apikey": API_KEY,
+      "cache-control": "no-cache",
+    },
+    body: postData,
+  })
+    .then((d) => d.json())
+    .then((data) => console.log(`edited ${data}`));
+  document
+    .querySelector(`div[data-id="${id}"] .editForm`)
+    .classList.add("hidden");
+  document
+    .querySelector(`div[data-id="${id}"] .card`)
+    .classList.remove("hidden");
+  document.querySelector(`div[data-id="${id}"] .card .desc`).textContent =
+    data.desc;
 }
 
 function deleteIt(id) {
@@ -141,27 +161,7 @@ function get() {
     },
   })
     .then((res) => res.json())
-    .then(showCards)
-    .then(() => {
-      // TODO: add event listener for new card. maybe in showCard()?
-      document.querySelectorAll(".card").forEach((ele) => {
-        ele.addEventListener("mouseenter", (e) =>
-          e.target.querySelector(".deleteBtn").classList.remove("hidden")
-        );
-        ele.addEventListener("mouseleave", (e) =>
-          e.target.querySelector(".deleteBtn").classList.add("hidden")
-        );
-        ele.addEventListener("click", (e) => {
-          e.target.parentNode.querySelector(
-            "input"
-          ).value = e.target.querySelector(".desc").textContent;
-          e.target.classList.add("hidden");
-          e.target.parentNode
-            .querySelector(".editForm")
-            .classList.remove("hidden");
-        });
-      });
-    });
+    .then(showCards);
 }
 
 function showCards(cards) {
@@ -174,10 +174,38 @@ function showCard(card) {
   const parent = document.querySelector(`#${card.position} div`);
 
   copy.querySelector("div").dataset.id = card._id;
+  copy.querySelector("div").dataset.position = card.position;
   copy.querySelector("span").textContent = card.desc;
 
   copy.querySelector(".deleteBtn").addEventListener("click", () => {
     deleteIt(card._id);
+  });
+  copy.querySelector(".editBtn").addEventListener("click", (e) => {
+    put(
+      {
+        position: card.position,
+        desc: e.target.parentNode.querySelector(".editText").value,
+      },
+      card._id
+    );
+  });
+
+  copy
+    .querySelector(".card")
+    .addEventListener("mouseenter", (e) =>
+      e.target.querySelector(".deleteBtn").classList.remove("hidden")
+    );
+  copy
+    .querySelector(".card")
+    .addEventListener("mouseleave", (e) =>
+      e.target.querySelector(".deleteBtn").classList.add("hidden")
+    );
+  copy.querySelector(".card").addEventListener("click", (e) => {
+    e.target.parentNode.querySelector("input").value = e.target.querySelector(
+      ".desc"
+    ).textContent;
+    e.target.classList.add("hidden");
+    e.target.parentNode.querySelector(".editForm").classList.remove("hidden");
   });
 
   parent.appendChild(copy);
