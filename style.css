@@ -13,7 +13,7 @@ main {
 
 section {
   background-color: #e7e7e7;
-  border: 3px solid black;
+  border: 2px outset #efefef;
   border-radius: 10px;
   margin-top: 10px;
   justify-content: space-around;
@@ -32,12 +32,14 @@ h2 {
   /* need block status for "margin: 0 auto;" */
   display: block;
   margin: 0 auto;
-  width: 90%;
+  width: 95%;
   min-height: 5vh;
   background-color: #e7e7e7;
   color: #555555;
-  border: 0;
+  border-radius: 5px;
+  border-style: hidden;
   font-size: 20px;
+  transition-duration: 0.4s;
 }
 .addBtn span::before {
   content: "+ ";
@@ -55,4 +57,12 @@ h2 {
 }
 
 #done {
+}
+
+.invalid {
+  border-color: red;
+}
+
+.hidden {
+  display: none;
 }
