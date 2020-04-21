@@ -109,7 +109,7 @@ function put(data, id) {
       body: postData,
     })
       .then((d) => d.json())
-      .then((data) => console.log(`edited ${data}`));
+      .then(() => console.log(`edited ${postData}`));
     document
       .querySelector(`div[data-id="${id}"] .editForm`)
       .classList.add("hidden");
@@ -164,7 +164,8 @@ function get() {
     },
   })
     .then((res) => res.json())
-    .then(showCards);
+    .then(showCards)
+    .then(() => document.querySelector(".loading").remove());
 }
 
 function showCards(cards) {
