@@ -96,26 +96,30 @@ function checkValidation(form, position) {
 }
 
 function put(data, id) {
-  const postData = JSON.stringify(data);
-  fetch(DB_URL + "/" + id, {
-    method: "put",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "x-apikey": API_KEY,
-      "cache-control": "no-cache",
-    },
-    body: postData,
-  })
-    .then((d) => d.json())
-    .then((data) => console.log(`edited ${data}`));
-  document
-    .querySelector(`div[data-id="${id}"] .editForm`)
-    .classList.add("hidden");
-  document
-    .querySelector(`div[data-id="${id}"] .card`)
-    .classList.remove("hidden");
-  document.querySelector(`div[data-id="${id}"] .card .desc`).textContent =
-    data.desc;
+  if (data.desc == "") {
+    deleteIt(id);
+  } else {
+    const postData = JSON.stringify(data);
+    fetch(DB_URL + "/" + id, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "x-apikey": API_KEY,
+        "cache-control": "no-cache",
+      },
+      body: postData,
+    })
+      .then((d) => d.json())
+      .then((data) => console.log(`edited ${data}`));
+    document
+      .querySelector(`div[data-id="${id}"] .editForm`)
+      .classList.add("hidden");
+    document
+      .querySelector(`div[data-id="${id}"] .card`)
+      .classList.remove("hidden");
+    document.querySelector(`div[data-id="${id}"] .card .desc`).textContent =
+      data.desc;
+  }
 }
 
 function deleteIt(id) {
