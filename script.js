@@ -16,7 +16,7 @@ function showAddForm(e) {
   const saveBtn = document.createElement("button");
   const cancelBtn = document.createElement("button");
   const position = e.target.dataset.position;
-  form.id = "addForm";
+  form.classList.add("addForm");
   textarea.placeholder = "Write contents for this card...";
   textarea.name = "desc";
   textarea_p.classList.add("hidden");
@@ -70,7 +70,7 @@ function checkValidation(form, position) {
   }
 
   if (form.checkValidity() && validForm) {
-    if (form == document.querySelector("#addForm")) {
+    if (form == document.querySelector(".addForm")) {
       post({ position: position, desc: textarea.value });
       console.log("submitted " + textarea.value);
       form.remove();

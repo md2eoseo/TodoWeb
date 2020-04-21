@@ -86,7 +86,7 @@ h2 {
   outline: none;
 }
 
-#addForm textarea {
+textarea {
   display: block;
   width: 90%;
   height: 60px;
@@ -98,7 +98,7 @@ h2 {
   outline: none;
 }
 
-#addForm button {
+.addForm button {
   margin-left: 15px;
   margin-bottom: 5px;
 }
