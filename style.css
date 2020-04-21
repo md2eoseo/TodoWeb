@@ -123,6 +123,13 @@ textarea {
   font-size: large;
 }
 
+#todo .moveLeftBtn {
+  display: none;
+}
+#done .moveRightBtn {
+  display: none;
+}
+
 /* https://codepen.io/MattIn4D/pen/LiKFC */
 /* Absolute Center Spinner */
 .loading {
