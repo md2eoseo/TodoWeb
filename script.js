@@ -11,12 +11,15 @@ window.addEventListener("load", () => {
 function showAddForm(e) {
   const form = document.createElement("form");
   const textarea = document.createElement("textarea");
+  const textarea_p = document.createElement("p");
   const saveBtn = document.createElement("button");
   const cancelBtn = document.createElement("button");
   const position = e.target.dataset.position;
   form.id = "addForm";
   textarea.placeholder = "Write contents for this card...";
   textarea.name = "desc";
+  textarea_p.classList.add("hidden");
+  textarea_p.textContent = "It's empty. Fill something.";
   saveBtn.dataset.action = "inputTextarea";
   saveBtn.type = "submit";
   saveBtn.textContent = "Save";
@@ -29,6 +32,7 @@ function showAddForm(e) {
   cancelBtn.textContent = "X";
   cancelBtn.dataset.action = "cancel";
   form.appendChild(textarea);
+  form.appendChild(textarea_p);
   form.appendChild(saveBtn);
   form.appendChild(cancelBtn);
   document.querySelector(`section#${position}`).appendChild(form);
@@ -40,28 +44,27 @@ function showAddForm(e) {
 
 function checkValidation(form, position) {
   let validForm = false;
-  const elements = form.elements;
 
   const textarea = form.querySelector("textarea");
+  const textarea_p = form.querySelector("p");
   textarea.classList.remove("invalid");
-  console.log(textarea.value);
   if (!textarea.checkValidity()) {
-    ele.classList.add("invalid");
+    textarea.classList.add("invalid");
   }
 
   if (textarea.value != "") {
     textarea.classList.remove("invalid");
-    // textarea_p.classList.add("hidden");
+    textarea_p.classList.add("hidden");
     validForm = true;
   } else {
-    route.classList.add("invalid");
-    // textarea_p.classList.remove("hidden");
+    textarea.classList.add("invalid");
+    textarea_p.classList.remove("hidden");
   }
 
   if (form.checkValidity() && validForm) {
     if (form == document.querySelector("#addForm")) {
       post({ position: position, desc: textarea.value });
-      console.log("submitted " + elements.desc.value);
+      console.log("submitted " + textarea.value);
       form.remove();
       document
         .querySelector(`.addBtn[data-position="${position}"]`)
